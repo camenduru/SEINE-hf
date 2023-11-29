@@ -1,0 +1,36 @@
+
+ckpt: "/mnt/petrelfs/share_data/chenxinyuan/code/SEINE-release/pre-trained/seine.pt"
+# save_img_path: "./results/i2v/"
+save_img_path: "/mnt/petrelfs/share_data/zhouyan/gradio_i2v/"
+pretrained_model_path: "pre-trained/stable-diffusion-v1-4/"
+
+# model config: 
+model: TAVU
+num_frames: 16
+frame_interval: 1
+image_size: [512, 512]
+#image_size: [320, 512]
+# image_size: [512, 512]
+
+# model speedup
+use_compile: False
+use_fp16: True
+enable_xformers_memory_efficient_attention: True
+img_path: "/mnt/petrelfs/zhouyan/tmp/last"
+# sample config:
+seed:
+run_time: 13
+cfg_scale: 8.0
+sample_method: 'ddpm'
+num_sampling_steps: 250
+text_prompt: ["slow motion"]
+additional_prompt: ", slow motion."
+negative_prompt: ""
+do_classifier_free_guidance: True
+
+# autoregressive config:
+# input_path: "/mnt/petrelfs/zhouyan/tmp/未来上海/WechatIMG9434.jpg"
+input_path: "/mnt/petrelfs/zhouyan/tmp/last"
+researve_frame: 1
+mask_type: "first1"
+use_mask: True

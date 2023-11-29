@@ -1,0 +1,33 @@
+
+ckpt: "pre-trained/0020000.pt"
+save_img_path: "./results/transition/"
+pretrained_model_path: "pre-trained/stable-diffusion-v1-4/"
+
+# model config: 
+model: TAVU
+num_frames: 16
+frame_interval: 1
+#image_size: [240, 560]
+#image_size: [320, 512]
+image_size: [512, 512]
+
+# model speedup
+use_compile: False
+use_fp16: True
+enable_xformers_memory_efficient_attention: True
+
+# sample config:
+seed:
+run_time: 13
+cfg_scale: 8.0
+sample_method: 'ddpm'
+num_sampling_steps: 250
+text_prompt: ['smooth transition']
+additional_prompt: "smooth transition."
+negative_prompt: ""
+do_classifier_free_guidance: True
+
+# autoregressive config:
+input_path: 'input/transition/1'
+mask_type: "onelast1"
+use_mask: True
