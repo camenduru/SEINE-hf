@@ -1,3 +1,15 @@
+---
+title: "Seine"
+emoji: "😊"
+colorFrom: pink
+colorTo: pink
+sdk: gradio
+sdk_version: 4.3.0
+app_file: base/app.py
+pinned: false
+---
+
+
 # SEINE
 This repository is the official implementation of [SEINE](https://arxiv.org/abs/2310.20700).
 
