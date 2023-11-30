@@ -12,25 +12,6 @@ config_path = "./configs/sample_i2v.yaml"
 args = OmegaConf.load(config_path)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# ------- get model ---------------
-# model_i2V = model_i2v_fun()
-# model_i2V.to("cuda")
-
-# vae, model, text_encoder, diffusion = model_i2v_fun(args)
-# vae.to(device)
-# model.to(device)
-# text_encoder.to(device)
-
-# if args.use_fp16:
-#     vae.to(dtype=torch.float16)
-#     model.to(dtype=torch.float16)
-#     text_encoder.to(dtype=torch.float16)
-
-# if args.enable_xformers_memory_efficient_attention and device=="cuda":
-#     if is_xformers_available():
-#         model.enable_xformers_memory_efficient_attention()
-#     else:
-#         raise ValueError("xformers is not available. Make sure it is installed correctly")
 
 
 css = """
