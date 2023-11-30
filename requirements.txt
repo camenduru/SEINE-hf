@@ -52,3 +52,4 @@ fire
 uuid
 python-docx
 tensorboardX
+tensorboard
