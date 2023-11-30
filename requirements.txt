@@ -50,3 +50,4 @@ webdataset>=0.2.33
 wheel>=0.41.0
 fire
 uuid
+exceptions
