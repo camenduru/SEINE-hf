@@ -14,7 +14,7 @@ omegaconf==2.3.0
 natsort==8.4.0
 rotary_embedding_torch
 gradio==4.3.0
-
+docx
 black==23.7.0
 chardet==5.1.0
 clip @ git+https://github.com/openai/CLIP.git
