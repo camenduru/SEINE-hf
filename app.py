@@ -8,7 +8,7 @@ from utils import mask_generation_before
 import os 
 import cv2
 
-config_path = "/mnt/petrelfs/zhouyan/project/i2v/configs/sample_i2v.yaml"
+config_path = "./configs/sample_i2v.yaml"
 args = OmegaConf.load(config_path)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -152,9 +152,9 @@ with gr.Blocks(css='style.css') as demo:
         inputs = [prompt,image_inp, seed_inp, ddim_steps]
         outputs = [video_out]
         ex = gr.Examples(
-            examples = [["/mnt/petrelfs/zhouyan/project/i2v/The_picture_shows_the_beauty_of_the_sea_.jpg","A video of the beauty of the sea",123,50],
-                        ["/mnt/petrelfs/zhouyan/project/i2v/The_picture_shows_the_beauty_of_the_sea.png","A video of the beauty of the sea",123,50],
-                        ["/mnt/petrelfs/zhouyan/project/i2v/Close-up_essence_is_poured_from_bottleKodak_Vision.png","A video of close-up essence is poured from bottleKodak Vision",123,50]],
+            examples = [["./The_picture_shows_the_beauty_of_the_sea_.jpg","A video of the beauty of the sea",123,50],
+                        ["./The_picture_shows_the_beauty_of_the_sea.png","A video of the beauty of the sea",123,50],
+                        ["./Close-up_essence_is_poured_from_bottleKodak_Vision.png","A video of close-up essence is poured from bottleKodak Vision",123,50]],
             fn = infer,
             inputs = [image_inp, prompt, seed_inp, ddim_steps],
             outputs=[video_out],
@@ -163,15 +163,7 @@ with gr.Blocks(css='style.css') as demo:
 
         )
         ex.dataset.headers = [""]
-        # gr.Markdown("<center>some examples</center>")
-        # with gr.Row():
-        #     gr.Image(value="/mnt/petrelfs/zhouyan/project/i2v/The_picture_shows_the_beauty_of_the_sea_.jpg")
-        #     gr.Image(value="/mnt/petrelfs/zhouyan/project/i2v/The_picture_shows_the_beauty_of_the_sea.png")
-        #     gr.Image(value="/mnt/petrelfs/zhouyan/project/i2v/Close-up_essence_is_poured_from_bottleKodak_Vision.png")
-        # with gr.Row():
-        #     gr.Video(value="/mnt/petrelfs/zhouyan/project/i2v/The-picture-shows-the-beauty-of-the-sea-and-at-the-sam_slow-motion_0000_11301.mp4")
-        #     gr.Video(value="/mnt/petrelfs/zhouyan/project/i2v/The-picture-shows-the-beauty-of-the-sea-and-at-the-sam_slow-motion_0000_6600.mp4")
-        #     gr.Video(value="/mnt/petrelfs/zhouyan/project/i2v/Close-up-essence-is-poured-from-bottleKodak-Vision3-50_slow-motion_0000_001.mp4")
+       
     # control_task.change(change_task_options, inputs=[control_task], outputs=[canny_opt, hough_opt, normal_opt], queue=False)
     clean_btn.click(clean, inputs=[], outputs=[video_out], queue=False)
     submit_btn.click(infer, inputs, outputs)
