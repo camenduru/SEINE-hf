@@ -50,3 +50,4 @@ wheel>=0.41.0
 fire
 uuid
 python-docx
+tensorboardX
