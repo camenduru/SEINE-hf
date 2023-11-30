@@ -640,53 +640,53 @@ class UNet3DConditionModel(ModelMixin, ConfigMixin):
         #    'CrossAttnUpBlock3D']}
 
         model = cls.from_config(config)
-        model_file = os.path.join(pretrained_model_path, WEIGHTS_NAME)
-        if not os.path.isfile(model_file):
-            raise RuntimeError(f"{model_file} does not exist")
-        state_dict = torch.load(model_file, map_location="cpu")
+        # model_file = os.path.join(pretrained_model_path, WEIGHTS_NAME)
+        # if not os.path.isfile(model_file):
+        #     raise RuntimeError(f"{model_file} does not exist")
+        # state_dict = torch.load(model_file, map_location="cpu")
 
-        if use_concat:
-            new_state_dict = {}
-            conv_in_weight = state_dict["conv_in.weight"]
-            new_conv_weight = torch.zeros((conv_in_weight.shape[0], 9, *conv_in_weight.shape[2:]), dtype=conv_in_weight.dtype)
+        # if use_concat:
+        #     new_state_dict = {}
+        #     conv_in_weight = state_dict["conv_in.weight"]
+        #     new_conv_weight = torch.zeros((conv_in_weight.shape[0], 9, *conv_in_weight.shape[2:]), dtype=conv_in_weight.dtype)
         
-            for i, j in zip([0, 1, 2, 3], [0, 1, 2, 3, 4, 5, 6, 7, 8]):
-                new_conv_weight[:, j] = conv_in_weight[:, i]
-            new_state_dict["conv_in.weight"] = new_conv_weight
-            new_state_dict["conv_in.bias"] = state_dict["conv_in.bias"]
-            for k, v in model.state_dict().items():
-                # print(k)
-                if '_temp.' in k:
-                    new_state_dict.update({k: v})
-                if 'attn_fcross' in k: # conpy parms of attn1 to attn_fcross
-                    k = k.replace('attn_fcross', 'attn1')
-                    state_dict.update({k: state_dict[k]})
-                if 'norm_fcross' in k:
-                    k = k.replace('norm_fcross', 'norm1')
-                    state_dict.update({k: state_dict[k]})
+        #     for i, j in zip([0, 1, 2, 3], [0, 1, 2, 3, 4, 5, 6, 7, 8]):
+        #         new_conv_weight[:, j] = conv_in_weight[:, i]
+        #     new_state_dict["conv_in.weight"] = new_conv_weight
+        #     new_state_dict["conv_in.bias"] = state_dict["conv_in.bias"]
+        #     for k, v in model.state_dict().items():
+        #         # print(k)
+        #         if '_temp.' in k:
+        #             new_state_dict.update({k: v})
+        #         if 'attn_fcross' in k: # conpy parms of attn1 to attn_fcross
+        #             k = k.replace('attn_fcross', 'attn1')
+        #             state_dict.update({k: state_dict[k]})
+        #         if 'norm_fcross' in k:
+        #             k = k.replace('norm_fcross', 'norm1')
+        #             state_dict.update({k: state_dict[k]})
                     
-                if 'conv_in' in k:
-                    continue
-                else:
-                    new_state_dict[k] = v
-                # # tmp 
-                # if 'class_embedding' in k:
-                #     state_dict.update({k: v})
-            # breakpoint()
-            model.load_state_dict(new_state_dict)
-        else:
-            for k, v in model.state_dict().items():
-                # print(k)
-                if '_temp' in k:
-                    state_dict.update({k: v})
-                if 'attn_fcross' in k: # conpy parms of attn1 to attn_fcross
-                    k = k.replace('attn_fcross', 'attn1')
-                    state_dict.update({k: state_dict[k]})
-                if 'norm_fcross' in k:
-                    k = k.replace('norm_fcross', 'norm1')
-                    state_dict.update({k: state_dict[k]})
+        #         if 'conv_in' in k:
+        #             continue
+        #         else:
+        #             new_state_dict[k] = v
+        #         # # tmp 
+        #         # if 'class_embedding' in k:
+        #         #     state_dict.update({k: v})
+        #     # breakpoint()
+        #     model.load_state_dict(new_state_dict)
+        # else:
+        #     for k, v in model.state_dict().items():
+        #         # print(k)
+        #         if '_temp' in k:
+        #             state_dict.update({k: v})
+        #         if 'attn_fcross' in k: # conpy parms of attn1 to attn_fcross
+        #             k = k.replace('attn_fcross', 'attn1')
+        #             state_dict.update({k: state_dict[k]})
+        #         if 'norm_fcross' in k:
+        #             k = k.replace('norm_fcross', 'norm1')
+        #             state_dict.update({k: state_dict[k]})
 
-            model.load_state_dict(state_dict)
+        #     model.load_state_dict(state_dict)
 
         return model
     
