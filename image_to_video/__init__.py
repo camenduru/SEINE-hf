@@ -148,7 +148,7 @@ def get_input(path,args):
         ])
     temporal_sample_func = video_transforms.TemporalRandomCrop(args.num_frames * args.frame_interval)
     if input_path is not None:
-        print(f'loading video from {input_path}')
+        print(f'loading image from {input_path}')
         if os.path.isdir(input_path):
             file_list = os.listdir(input_path)
             video_frames = []
