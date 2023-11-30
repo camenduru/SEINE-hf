@@ -29,15 +29,7 @@ def infer(prompt, image_inp, seed_inp, ddim_steps,width,height):
     print(prompt, seed_inp, ddim_steps, type(image_inp))
     img = cv2.imread(image_inp)
     new_size = [height,width]
-    # if(img.shape[0]==512 and img.shape[1]==512):
-    #     args.image_size = [512,512]
-    # elif(img.shape[0]==320 and img.shape[1]==512):
-    #     args.image_size = [320, 512]
-    # elif(img.shape[0]==292 and img.shape[1]==512):
-    #     args.image_size = [292,512]
-    # else:
-    #     raise ValueError("Please enter image of right size")
-    # print(args.image_size)
+    
     args.image_size = new_size
 
     vae, model, text_encoder, diffusion = model_i2v_fun(args)
@@ -120,7 +112,7 @@ with gr.Blocks(css='style.css') as demo:
                     seed_inp = gr.Slider(label="Seed", minimum=0, maximum=2147483647, step=1, value=250, elem_id="seed-in")
                 with gr.Row():
                     width = gr.Slider(label='width',minimum=1,maximum=2000,value=512,step=1)
-                    height = gr.Slider(label='height',minimum=1,maximum=2000,value=512,step=1)
+                    height = gr.Slider(label='height',minimum=1,maximum=2000,value=320,step=1)
                 # ddim_steps = gr.Slider(label='Steps', minimum=50, maximum=300, value=250, step=1)
                 
                
