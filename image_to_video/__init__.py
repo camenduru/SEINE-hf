@@ -6,7 +6,7 @@ try:
     import utils
 
     from diffusion import create_diffusion
-    from download import find_model
+
 except:
     # sys.path.append(os.getcwd())
     sys.path.append(os.path.split(sys.path[0])[0])
@@ -17,7 +17,6 @@ except:
     import utils
 
     from diffusion import create_diffusion
-    from download import find_model
 
 import torch
 torch.backends.cuda.matmul.allow_tf32 = True
@@ -40,7 +39,7 @@ from utils import mask_generation_before
 from natsort import natsorted
 from diffusers.utils.import_utils import is_xformers_available
 
-config_path = "/mnt/petrelfs/zhouyan/project/i2v/configs/sample_i2v.yaml"
+config_path = "configs/sample_i2v.yaml"
 args = OmegaConf.load(config_path)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(args)
