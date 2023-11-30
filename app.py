@@ -8,13 +8,9 @@ from utils import mask_generation_before
 import os 
 import cv2
 
-os.system('wget https://huggingface.co/Vchitect/SEINE/resolve/main/seine.pt?download=true -o pre-trained/')
-
 config_path = "./configs/sample_i2v.yaml"
 args = OmegaConf.load(config_path)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-
-
 
 css = """
 h1 {
