@@ -132,9 +132,9 @@ with gr.Blocks(css='style.css') as demo:
         inputs = [prompt,image_inp, seed_inp, ddim_steps]
         outputs = [video_out]
         ex = gr.Examples(
-            examples = [["./The_picture_shows_the_beauty_of_the_sea_.jpg","A video of the beauty of the sea",123,50],
-                        ["./The_picture_shows_the_beauty_of_the_sea.png","A video of the beauty of the sea",123,50],
-                        ["./Close-up_essence_is_poured_from_bottleKodak_Vision.png","A video of close-up essence is poured from bottleKodak Vision",123,50]],
+            examples = [["./The_picture_shows_the_beauty_of_the_sea_.jpg","A video of the beauty of the sea",123,250],
+                        ["./The_picture_shows_the_beauty_of_the_sea.png","A video of the beauty of the sea",123,250],
+                        ["./Close-up_essence_is_poured_from_bottleKodak_Vision.png","A video of close-up essence is poured from bottleKodak Vision",123,250]],
             fn = infer,
             inputs = [image_inp, prompt, seed_inp, ddim_steps],
             outputs=[video_out],
