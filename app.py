@@ -63,7 +63,6 @@ def infer(prompt, image_inp, seed_inp, ddim_steps):
     video_input = video_input.to(device).unsqueeze(0)
     mask = mask_generation_before(args.mask_type, video_input.shape, video_input.dtype, device)
     masked_video = video_input * (mask == 0)
-    prompt = "tilt up, high quality, stable "
     prompt = prompt + args.additional_prompt
     video_clip = auto_inpainting(args, video_input, masked_video, mask, prompt, vae, text_encoder, diffusion, model, device,)
     video_ = ((video_clip * 0.5 + 0.5) * 255).add_(0.5).clamp_(0, 255).to(dtype=torch.uint8).cpu().permute(0, 2, 3, 1)
