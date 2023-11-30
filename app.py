@@ -22,13 +22,13 @@ h1 {
 }
 """
 
-def infer(prompt, image_inp, seed_inp, ddim_steps):
+def infer(prompt, image_inp, seed_inp, ddim_steps,width,height):
     setup_seed(seed_inp)
     args.num_sampling_steps = ddim_steps
     ###先测试Image的返回类型
     print(prompt, seed_inp, ddim_steps, type(image_inp))
     img = cv2.imread(image_inp)
-    new_size = [img.shape[0],img.shape[1]]
+    new_size = [height,width]
     # if(img.shape[0]==512 and img.shape[1]==512):
     #     args.image_size = [512,512]
     # elif(img.shape[0]==320 and img.shape[1]==512):
@@ -118,7 +118,9 @@ with gr.Blocks(css='style.css') as demo:
                     # control_task = gr.Dropdown(label="Task", choices=["Text-2-video", "Image-2-video"], value="Text-2-video", multiselect=False, elem_id="controltask-in")
                     ddim_steps = gr.Slider(label='Steps', minimum=50, maximum=300, value=250, step=1)
                     seed_inp = gr.Slider(label="Seed", minimum=0, maximum=2147483647, step=1, value=250, elem_id="seed-in")
-                
+                with gr.Row():
+                    width = gr.Slider(label='width',minimum=1,maximum=2000,value=512,step=1)
+                    height = gr.Slider(label='height',minimum=1,maximum=2000,value=512,step=1)
                 # ddim_steps = gr.Slider(label='Steps', minimum=50, maximum=300, value=250, step=1)
                 
                
@@ -127,14 +129,14 @@ with gr.Blocks(css='style.css') as demo:
                 clean_btn = gr.Button("Clean video")
 
         video_out = gr.Video(label="Video result", elem_id="video-output", width = 800)
-        inputs = [prompt,image_inp, seed_inp, ddim_steps]
+        inputs = [prompt,image_inp, seed_inp, ddim_steps,width,height]
         outputs = [video_out]
         ex = gr.Examples(
-            examples = [["./The_picture_shows_the_beauty_of_the_sea_.jpg","A video of the beauty of the sea",123,250],
-                        ["./The_picture_shows_the_beauty_of_the_sea.png","A video of the beauty of the sea",123,250],
-                        ["./Close-up_essence_is_poured_from_bottleKodak_Vision.png","A video of close-up essence is poured from bottleKodak Vision",123,250]],
+            examples = [["./The_picture_shows_the_beauty_of_the_sea_.jpg","A video of the beauty of the sea",123,250,512,512],
+                        ["./The_picture_shows_the_beauty_of_the_sea.png","A video of the beauty of the sea",123,250,512,512],
+                        ["./Close-up_essence_is_poured_from_bottleKodak_Vision.png","A video of close-up essence is poured from bottleKodak Vision",123,250,512,512]],
             fn = infer,
-            inputs = [image_inp, prompt, seed_inp, ddim_steps],
+            inputs = [image_inp, prompt, seed_inp, ddim_steps,width,height],
             outputs=[video_out],
             cache_examples=False
 
