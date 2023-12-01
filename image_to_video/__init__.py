@@ -209,7 +209,7 @@ def get_input(path,args):
         # raise ValueError('Need to give a video or some images')
         print('given video is None, using text to video')
         video_frames = torch.zeros(16,3,args.latent_h,args.latent_w,dtype=torch.uint8)
-        args.mask_type = 'all'
+        args.mask_type = 'first1'
         video_frames = transform_video(video_frames)
         n = 0
         return video_frames, n
