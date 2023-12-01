@@ -90,7 +90,7 @@ with gr.Blocks(css='style.css') as demo:
     gr.Markdown("<font color=red size=10><center>SEINE: Image-to-Video generation</center></font>")
     gr.Markdown(
         """<div style="text-align:center">
-        [Arxiv Report](https://arxiv.org/abs/2310.20700) | [Project Page](https://vchitect.github.io/SEINE-project/) | [Github](https://github.com/Vchitect/SEINE)</div>
+        [<a href="https://arxiv.org/abs/2310.20700">Arxiv Report</a>] | [<a href="https://vchitect.github.io/SEINE-project/">Project Page</a>] | [<a href="https://github.com/Vchitect/SEINE">Github</a>]</div>
         """
     )
     with gr.Column(elem_id="col-container"):
