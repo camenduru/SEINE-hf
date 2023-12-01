@@ -49,13 +49,6 @@ from utils import mask_generation_before
 from natsort import natsorted
 from diffusers.utils.import_utils import is_xformers_available
 
-
-doc = docx.Document("/mnt/petrelfs/zhouyan/tmp/星际旅行.docx")
-start = 1
-p_dict = {}
-for param in doc.paragraphs:
-    p_dict[start] = param.text
-    start = start+1
 # def get_input(args):
 def get_input(path,args):
     input_path = path
