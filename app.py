@@ -25,13 +25,9 @@ h1 {
 def infer(prompt, image_inp, seed_inp, ddim_steps,width,height):
     setup_seed(seed_inp)
     args.num_sampling_steps = ddim_steps
-    ###先测试Image的返回类型
-    print(prompt, seed_inp, ddim_steps, type(image_inp))
     img = cv2.imread(image_inp)
-    new_size = [height,width]
-    
+    new_size = [height,width]  
     args.image_size = new_size
-
     vae, model, text_encoder, diffusion = model_i2v_fun(args)
     vae.to(device)
     model.to(device)
@@ -58,17 +54,14 @@ def infer(prompt, image_inp, seed_inp, ddim_steps,width,height):
     video_ = ((video_clip * 0.5 + 0.5) * 255).add_(0.5).clamp_(0, 255).to(dtype=torch.uint8).cpu().permute(0, 2, 3, 1)
     torchvision.io.write_video(os.path.join(args.save_img_path,  prompt+ '.mp4'), video_, fps=8)
 
-
-    
-    # video = model_i2V(prompt, image_inp, seed_inp, ddim_steps)
     
     return os.path.join(args.save_img_path,  prompt+ '.mp4')
 
 
 
-def clean():
+# def clean():
     # return gr.Image.update(value=None, visible=False), gr.Video.update(value=None)
-    return gr.Video.update(value=None)
+    # return gr.Video.update(value=None)
 
 
 title = """
@@ -118,7 +111,7 @@ with gr.Blocks(css='style.css') as demo:
                
                 
                 submit_btn = gr.Button("Generate video")
-                clean_btn = gr.Button("Clean video")
+                # clean_btn = gr.Button("Clean video")
 
         video_out = gr.Video(label="Video result", elem_id="video-output", width = 800)
         inputs = [prompt,image_inp, seed_inp, ddim_steps,width,height]
@@ -137,7 +130,7 @@ with gr.Blocks(css='style.css') as demo:
         ex.dataset.headers = [""]
        
     # control_task.change(change_task_options, inputs=[control_task], outputs=[canny_opt, hough_opt, normal_opt], queue=False)
-    clean_btn.click(clean, inputs=[], outputs=[video_out], queue=False)
+    # clean_btn.click(clean, inputs=[], outputs=[video_out], queue=False)
     submit_btn.click(infer, inputs, outputs)
     # share_button.click(None, [], [], _js=share_js)
 
