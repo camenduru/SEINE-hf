@@ -206,13 +206,13 @@ def get_input(path,args):
         else:
             raise ValueError('Please check your path input!!')
     else:
-        # raise ValueError('Need to give a video or some images')
-        print('given video is None, using text to video')
-        video_frames = torch.zeros(16,3,args.latent_h,args.latent_w,dtype=torch.uint8)
-        args.mask_type = 'first1'
-        video_frames = transform_video(video_frames)
-        n = 0
-        return video_frames, n
+        raise ValueError('Need to give a video or some images')
+        # print('given video is None, using text to video')
+        # video_frames = torch.zeros(16,3,args.latent_h,args.latent_w,dtype=torch.uint8)
+        # args.mask_type = 'first1'
+        # video_frames = transform_video(video_frames)
+        # n = 0
+        # return video_frames, n
     
 def setup_seed(seed):
 	torch.manual_seed(seed)
